@@ -774,7 +774,7 @@
                     </div>
                     <h3 class="feature-title">Efisien & Cepat</h3>
                     <p class="feature-description">
-                        Hanya butuh 3 pertanyaan sederhana untuk mendapatkan program latihan yang komprehensif
+                        Hanya butuh beberapa pertanyaan sederhana untuk mendapatkan program latihan yang komprehensif
                     </p>
                 </div>
                 
@@ -824,7 +824,7 @@
                     <div class="step-number">1</div>
                     <h3 class="step-title">Jawab Pertanyaan</h3>
                     <p class="step-description">
-                        Jawab 3 pertanyaan sederhana tentang tujuan fitness, waktu yang tersedia, dan level pengalaman Anda
+                        Jawab beberapa pertanyaan sederhana tentang tujuan fitness, waktu yang tersedia, dan level pengalaman Anda
                     </p>
                 </div>
                 
