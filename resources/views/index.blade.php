@@ -406,7 +406,8 @@
                 document.getElementById('submitBtn').addEventListener('click', () => {
                     const inputs  =  document.querySelectorAll('.option-input');
                     const selectedInputs = Array.from(inputs).filter(input => input.checked);
-                    window.location.href = '/output?options=' + selectedInputs.map(input => input.value).join(',');
+                    const encrypted = btoa(JSON.stringify(selectedInputs.map(input => input.value)));
+                    window.location.href = '/output?o=' + encrypted;
                 });
 
                 // Radio button changes

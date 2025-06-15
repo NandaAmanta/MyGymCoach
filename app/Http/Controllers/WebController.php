@@ -17,7 +17,8 @@ class WebController extends Controller
     }
     public function output()
     {
-        $optionIds = explode(',',request()->get('options'));
+        $encodedOptions = base64_decode(request()->get('o'));
+        $optionIds = json_decode($encodedOptions);
         $output = \App\Models\Output::query()
         ->with(['schedule']);
 
