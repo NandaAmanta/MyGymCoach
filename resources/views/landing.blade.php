@@ -752,9 +752,9 @@
                     <div class="feature-icon">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3 class="feature-title">AI Expert System</h3>
+                    <h3 class="feature-title">Expert System</h3>
                     <p class="feature-description">
-                        Sistem kecerdasan buatan yang menganalisis jawaban Anda untuk memberikan rekomendasi yang tepat dan personal
+                        Sistem Ahli buatan yang menganalisis jawaban Anda untuk memberikan rekomendasi yang tepat dan personal
                     </p>
                 </div>
                 
@@ -830,7 +830,7 @@
                 
                 <div class="step-card fade-in">
                     <div class="step-number">2</div>
-                    <h3 class="step-title">Analisis AI</h3>
+                    <h3 class="step-title">Analisis Sebagai Ahli</h3>
                     <p class="step-description">
                         Sistem expert kami menganalisis jawaban Anda menggunakan algoritma khusus yang telah teruji
                     </p>
