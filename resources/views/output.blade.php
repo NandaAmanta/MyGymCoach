@@ -21,7 +21,7 @@
 
         /* Header Section */
         .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #213555 0%, #3E5879 50%, #D8C4B6 100%);
             color: white;
             padding: 60px 0;
             position: relative;
@@ -105,7 +105,7 @@
         }
 
         .breadcrumb-link {
-            color: #667eea;
+            color: #213555;
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -168,7 +168,7 @@
         .featured-image {
             width: 100%;
             height: 300px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #213555 0%, #3E5879 50%, #D8C4B6 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -566,7 +566,7 @@
                 </div>
 
                 <!-- Contact Widget -->
-                <div class="sidebar-widget">
+                {{-- <div class="sidebar-widget">
                     <h3 class="widget-title">
                         <i class="fas fa-headset"></i>
                         Butuh Bantuan?
@@ -576,7 +576,7 @@
                         <i class="fas fa-comment"></i>
                         Hubungi Trainer
                     </a>
-                </div>
+                </div> --}}
             </aside>
         </div>
     </div>
