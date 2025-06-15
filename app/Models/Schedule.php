@@ -8,7 +8,7 @@ class Schedule extends Model
 {
     protected $table = 'schedules';
 
-    protected $fillabe = [
+    protected $fillable  = [
         'title',
         'description',
         'content',

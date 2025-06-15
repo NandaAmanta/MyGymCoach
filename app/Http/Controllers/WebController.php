@@ -18,10 +18,15 @@ class WebController extends Controller
     public function output()
     {
         $optionIds = explode(',',request()->get('options'));
-        $output = \App\Models\Output::whereHas('options', function ($query) use ($optionIds) {
-            $query->whereIn('options.id', $optionIds);
-        })->first();
-        dd($output);
+        $output = \App\Models\Output::query()
+        ->with(['schedule']);
+
+        foreach ($optionIds as $optionId) {
+            $output = $output->whereHas('options', function ($query) use ($optionId) {
+                $query->where('options.id', $optionId);
+            });
+        }
+        $output = $output->first();
         return view('output', compact('output'));
     }
 }

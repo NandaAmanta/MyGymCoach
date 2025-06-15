@@ -526,7 +526,7 @@
                     </div>
                     
                     <h1 class="article-title">
-                        Program Latihan Strength Training untuk Pemula
+                        Berikut Adalah Rekomendasi Latihan Untuk Anda
                     </h1>
                     
                     <p class="article-excerpt">
@@ -539,13 +539,11 @@
                 </div>
 
                 <div class="article-body">
-                    <div class="highlight-box">
-                        <h3><i class="fas fa-bullseye"></i> Ringkasan Program Anda</h3>
-                        <p><strong>Tujuan:</strong> Menambah massa otot dan kekuatan dasar</p>
-                        <p><strong>Level:</strong> Pemula</p>
-                        <p><strong>Durasi:</strong> 45-60 menit per sesi</p>
-                        <p><strong>Frekuensi:</strong> 4x seminggu</p>
-                    </div>
+                    @if(!$output || !$output->schedule)
+                    <p>Maaf, kami tidak dapat menemukan jadwal latihan yang sesuai untuk Anda. Trainer kami akan segera menambahkan jadwal baru.</p>
+                    @else
+                    {!! $output->schedule->content !!}
+                    @endif
                 </div>
             </article>
 
@@ -555,25 +553,15 @@
                 <div class="sidebar-widget">
                     <h3 class="widget-title">
                         <i class="fas fa-lightbulb"></i>
-                        Tips Cepat
+                        Tips
                     </h3>
                     <ul class="tips-list">
+                        @foreach ($output->schedule->tips ?? [] as $tip)
                         <li>
                             <i class="fas fa-check-circle tip-icon"></i>
-                            <span>Konsistensi lebih penting daripada intensitas tinggi</span>
+                            <span>{{ $tip['tip'] }}</span>
                         </li>
-                        <li>
-                            <i class="fas fa-check-circle tip-icon"></i>
-                            <span>Tidur 7-9 jam untuk recovery optimal</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle tip-icon"></i>
-                            <span>Makan protein 30 menit setelah latihan</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-check-circle tip-icon"></i>
-                            <span>Dengarkan tubuh Anda, jangan memaksakan diri</span>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
 

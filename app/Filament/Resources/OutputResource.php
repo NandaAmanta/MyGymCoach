@@ -12,6 +12,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -44,8 +45,9 @@ class OutputResource extends Resource
                     }
                     return new HtmlString($html);
                 }),
-                TextColumn::make('schedule')
-                ->formatState(function (?Output $record) {
+                TextColumn::make('schedule')->label('Schedule')
+                ->default('No Schedule')
+                ->formatStateUsing(function (?Output $record) {
                     return $record->schedule->title ?? 'No Schedule';
                 }),
 
@@ -55,24 +57,41 @@ class OutputResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('Assign Schedule')
+                ->icon('heroicon-o-calendar-days')
+                ->requiresConfirmation()
+                ->form([
+                    Select::make('schedule')
+                    ->relationship('schedule', 'title')
+                    ->required()
+                ])
+                ->action(function (array $data, Output $record) {
+                    $record->schedule()->associate($data['schedule']);
+                    $record->save();
+                })
+                ,
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Action::make('Asssign Schedule')->form([
-                        Select::make('schedule')
-                        ->relationship('schedule', 'title')
-                        ->required()
-                    ])
-                    ->action(function (array $data, array $records) {
-                        foreach($records as $record){
-                            $record->schedule()->associate($data['schedule']);
-                            $record->save();
-                        }
-                    })
-                    ->requiresConfirmation(),
-                ]),
-            ]);
+                Tables\Actions\DeleteBulkAction::make(),
+                BulkAction::make('Asssign Schedule')
+                ->color('primary')
+                ->icon('heroicon-o-calendar-days')
+                ->requiresConfirmation()
+                ->form([
+                    Select::make('schedule')
+                    ->relationship('schedule', 'title')
+                    ->required()
+                ])
+                ->action(function (array $data, array $records) {
+                    foreach($records as $record){
+                        $record->schedule()->associate($data['schedule']);
+                        $record->save();
+                    }
+                }),
+            ]),
+        ]);
     }
 
     public static function getRelations(): array

@@ -6,6 +6,7 @@ use App\Filament\Resources\ScheduleResource\Pages;
 use App\Filament\Resources\ScheduleResource\RelationManagers;
 use App\Models\Schedule;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -26,6 +27,24 @@ class ScheduleResource extends Resource
                 Forms\Components\RichEditor::make('content')
                     ->required()
                     ->columnSpanFull(),
+
+                Forms\Components\TextInput::make('title')
+                    ->required()
+                    ->maxLength(255),
+                
+                Forms\Components\FileUpload::make('thumbnail')
+                    ->image()
+                    ->required(),
+
+                Forms\Components\TextInput::make('description')
+                    ->required()
+                    ->maxLength(255),
+                
+                Repeater::make('tips')
+                    ->schema([
+                        Forms\Components\TextInput::make('tip')
+                            ->required()
+                    ])
             ]);
     }
 
@@ -33,6 +52,8 @@ class ScheduleResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
