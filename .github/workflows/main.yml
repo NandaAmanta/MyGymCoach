@@ -1,0 +1,46 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Server
+        if: ${{ success() }}
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script_stop: true
+          script: |
+            cd /var/www/html/MyGymCoach
+            
+            # Konfigurasi Git dengan debug
+            git config --global user.name "NandaAmanta"
+            git config --global user.email "nansamgr@gmail.com"
+            git config --global url."https://${{ secrets.PAT }}@github.com/".insteadOf "https://github.com/"
+            
+            # Cek remote repo
+            git remote -v
+            git config --list
+            
+            # Pull kode terbaru
+            git fetch --all
+            git checkout main
+            git pull origin main
+            
+            # Setup Node.js
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            node -v
+            npm ci
+            npm run build
+            
+            # Setup PHP dan Laravel
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            php artisan optimize
+            php artisan migrate --force
