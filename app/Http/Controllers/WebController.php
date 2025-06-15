@@ -17,17 +17,21 @@ class WebController extends Controller
     }
     public function output()
     {
-        $encodedOptions = base64_decode(request()->get('o'));
-        $optionIds = json_decode($encodedOptions);
-        $output = \App\Models\Output::query()
-        ->with(['schedule']);
+        try{
+            $encodedOptions = base64_decode(request()->get('o'));
+            $optionIds = json_decode($encodedOptions);
+            $output = \App\Models\Output::query()
+            ->with(['schedule']);
 
-        foreach ($optionIds as $optionId) {
-            $output = $output->whereHas('options', function ($query) use ($optionId) {
-                $query->where('options.id', $optionId);
-            });
+            foreach ($optionIds as $optionId) {
+                $output = $output->whereHas('options', function ($query) use ($optionId) {
+                    $query->where('options.id', $optionId);
+                });
+            }
+            $output = $output->first();
+            return view('output', compact('output'));
+        }catch(\Exception $e){
+            return view('output');
         }
-        $output = $output->first();
-        return view('output', compact('output'));
     }
 }
