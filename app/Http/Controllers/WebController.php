@@ -31,7 +31,9 @@ class WebController extends Controller
             $output = $output->first();
             return view('output', compact('output'));
         }catch(\Exception $e){
-            return view('output');
+            return view('output', [
+                'output' => null
+            ]);
         }
     }
 }
